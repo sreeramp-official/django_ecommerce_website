@@ -1,0 +1,46 @@
+{% extends "main/base.html" %} {% block content %}
+
+<!-- ================ start banner area ================= -->
+<section class="blog-banner-area" id="category">
+  <div class="container h-100">
+    <div class="blog-banner">
+      <div class="text-center">
+        <h1>Shop Till You Drop</h1>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- ================ end banner area ================= -->
+
+<!-- ================ category section start ================= -->
+<section class="section-margin--small mb-5">
+  <div class="container">{% include 'main/product_card.html' %}</div>
+</section>
+<!-- ================ category section end ================= -->
+
+<!-- ================ top product area start ================= -->
+<section class="related-product-area">
+  <div class="container">
+    <div class="section-intro pb-60px">
+      <p>Newest Item in the market</p>
+      <h2>Latest <span class="section-intro__style">Product</span></h2>
+    </div>
+    <div class="row mt-30">
+      {% for latest_product in latest_products %}
+      <div class="col-sm-6 col-xl-3 mb-4 mb-xl-0">
+        <div class="single-search-product-wrapper">
+          <div class="single-search-product d-flex">
+            <a href="#"><img src="{{ latest_product.image.url }}" alt="{{ latest_product.name }}" /></a>
+            <div class="desc ms-3">
+              <a href="#" class="title">{{ latest_product.name }}</a>
+              <div class="price">Rs.{{ latest_product.price }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+<!-- ================ top product area end ================= -->
+{% endblock content %}

@@ -1,0 +1,58 @@
+{% extends 'main/base.html' %} {% load widget_tweaks %} {% block content %}
+<!--================Checkout Area =================-->
+<section class="checkout_area section-margin--small">
+  <div class="container">
+    <form method="post" action="{% url 'checkout' %}">
+      {% csrf_token %}
+      <div class="billing_details">
+        <div class="row">
+          <div class="col-lg-8">
+            <h3>Billing Details</h3>
+            {{ form.non_field_errors }}
+            <div class="form-group">{{ form.full_name.label_tag }} {{ form.full_name|add_class:"form-control" }}</div>
+            <div class="form-group">{{ form.address.label_tag }} {{ form.address|add_class:"form-control" }}</div>
+            <div class="form-group">{{ form.phone.label_tag }} {{ form.phone|add_class:"form-control" }}</div>
+
+            <h3>Payment Method</h3>
+            <div class="form-group">{{ form.payment_method }}</div>
+
+            <div class="form-check my-3">{{ form.accept_terms }} {{ form.accept_terms.label_tag }}</div>
+          </div>
+
+          <div class="col-lg-4">
+            <div class="order_box">
+              <h2>Your Order</h2>
+              <ul class="list">
+                {% for item in items %}
+                <li>
+                  <a href="#">
+                    {{ item.product.name }} x {{ item.quantity }}
+                    <span class="last">Rs.{{ item.product.price|floatformat:2 }}</span>
+                  </a>
+                </li>
+                {% endfor %}
+              </ul>
+              <ul class="list list_2">
+                <li>
+                  <a href="#">Subtotal <span>Rs.{{ subtotal|floatformat:2 }}</span></a>
+                </li>
+                <li>
+                  <a href="#">Shipping <span>Flat rate: Rs.{{ shipping }}</span></a>
+                </li>
+                <li>
+                  <a href="#">Total <span>Rs.{{ total|floatformat:2 }}</span></a>
+                </li>
+              </ul>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary w-100 mt-3">Proceed</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+<!--================End Checkout Area =================-->
+{% endblock content %}

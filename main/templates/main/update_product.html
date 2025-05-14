@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %} {% load static %} {% load widget_tweaks %} {% block content %}
+<section class="section-margin--small">
+  <div class="container">
+    <h2 class="text-center mb-4">Update Product</h2>
+    <div class="row justify-content-center">
+      <div class="col-md-8">
+        <form method="POST" enctype="multipart/form-data" class="form-contact contact_form">
+          {% csrf_token %}
+
+          <div class="form-group">{{ form.name.label_tag }} {{ form.name|add_class:"form-control" }}</div>
+
+          <div class="form-group">{{ form.price.label_tag }} {{ form.price|add_class:"form-control" }}</div>
+
+          <div class="form-group">{{ form.category.label_tag }} {{ form.category|add_class:"form-control" }}</div>
+
+          <div class="form-group">
+            {{ form.availability.label_tag }} {{ form.availability|add_class:"form-control w-100" }}
+          </div>
+
+          <div class="form-group">
+            {{ form.description.label_tag }} {{ form.description|add_class:"form-control h-100" }}
+          </div>
+
+          <div class="form-group">
+            {{ form.image.label_tag }} {{ form.image|add_class:"form-control" }}
+            <!-- Image input field -->
+          </div>
+
+          <div class="form-group text-center mt-4">
+            <button type="submit" class="button button-contactForm">Update Product</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock content %}

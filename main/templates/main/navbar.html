@@ -1,0 +1,74 @@
+{% load static %}
+<header class="header_area">
+  <div class="main_menu">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <div class="container">
+        <!-- Logo -->
+        <a class="navbar-brand logo_h" href="{% url 'home' %}">
+          <img src="{% static 'main/images/logo.png' %}" alt="Logo Image" />
+        </a>
+
+        <!-- Toggle button -->
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Collapsible content -->
+        <div class="collapse navbar-collapse offset" id="navbarSupportedContent">
+          <!-- Left Menu -->
+          <ul class="nav navbar-nav menu_nav ml-auto mr-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'home' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'shop' %}">Shop</a>
+            </li>
+            {% if user.user_type == "owner" or user.user_type == "admin" %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'add_product' %}">Add Item</a>
+            </li>
+            {% endif %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'order_history' %}">Order History</a>
+            </li>
+          </ul>
+
+          <!-- Right Menu: Cart + Auth -->
+          <ul class="nav navbar-nav d-flex align-items-center">
+            {% if user.user_type == "enduser" %}
+            <!-- Cart Icon -->
+            <li class="nav-item nav-shop mx-2">
+              <a href="{% url 'cart' %}">
+                <i class="ti-shopping-cart"></i>
+                <span class="nav-shop__circle"></span>
+              </a>
+            </li>
+            {% endif %}
+
+            <!-- Auth Buttons -->
+            <li class="nav-item">
+              {% if user.is_authenticated %}
+              <a href="{% url 'logout' %}" class="nav-link button-header">Logout</a>
+              {% else %}
+              <a href="{% url 'login' %}" class="nav-link button-header">Login</a>
+              {% endif %}
+            </li>
+            <li>
+              <strong>{{user.username}}<i>({{user.user_type}})</i></strong>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,45 @@
+{% extends "main/base.html" %} {% load mathfilters %} {% block content %}
+
+<section class="section-margin--small">
+  <div class="container">
+    <h2 class="mb-4 text-center">Order History</h2>
+
+    {% for order in orders %}
+    <div class="card mb-4">
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <strong>Order ID: {{ order.order_number }}</strong>
+        <span>Date: {{ order.created_at|date:"d-m-Y" }}</span>
+      </div>
+
+      <div class="card-body">
+        <ul class="list-group list-group-flush">
+          {% for item in order.filtered_items %} 
+          {% if user.user_type == "admin" %}
+          <p><strong>Bought by:</strong> {{ order.user.username }}</p>
+          <p><strong>Sold by:</strong> {{ item.product.added_by.username }}</p>
+
+          {% elif user.user_type == "owner" %}
+          <p><strong>Bought by:</strong> {{ order.user.username }}</p>
+          <p><strong>Sold by:</strong> You</p>
+
+          {% else %}
+          <p><strong>Bought by:</strong> You</p>
+          <p><strong>Sold by:</strong> {{ item.product.added_by.username }}</p>
+          {% endif %}
+
+          <li class="list-group-item">
+            <strong>Product:</strong> {{ item.product.name }}<br />
+            <strong>Quantity:</strong> {{ item.quantity }} <br />
+            <strong>Price (per unit):</strong> ₹{{ item.price }} <br />
+            <strong>Total:</strong> ₹{{ item.quantity|mul:item.price }} <br />
+          </li>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+    {% empty %}
+    <p class="text-center">No orders found.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

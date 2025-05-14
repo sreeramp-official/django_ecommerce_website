@@ -1,0 +1,21 @@
+{% extends "main/base.html" %} {% load widget_tweaks %} {% block content %}
+<div class="login_form_inner register_form_inner">
+  <h3>Add Item</h3>
+  <form class="row login_form" action="" id="register_form" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="col-md-12 form-group">{{ form.name.label_tag }} {{ form.name|add_class:"form-control" }}</div>
+    <div class="col-md-12 form-group">{{ form.price.label_tag }} {{ form.price|add_class:"form-control" }}</div>
+    <div class="col-md-12 form-group">{{ form.category.label_tag }} {{ form.category|add_class:"form-control" }}</div>
+    <div class="col-md-12 form-group">
+      {{ form.availability.label_tag }} {{ form.availability|add_class:"form-control w-100" }}
+    </div>
+    <div class="col-md-12 form-group">
+      {{ form.description.label_tag }} {{ form.description|add_class:"form-control" }}
+    </div>
+    <div class="col-md-12 form-group">{{ form.image.label_tag }} {{ form.image|add_class:"form-control" }}</div>
+    <div class="col-md-12 form-group">
+      <button type="submit" value="submit" class="button button-hero w-100">Submit</button>
+    </div>
+  </form>
+</div>
+{% endblock content %}

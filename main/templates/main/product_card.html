@@ -1,0 +1,29 @@
+<div class="row justify-content-center">
+  {% for product in products %}
+  <div class="col-md-6 col-lg-4 col-xl-3 mb-4 d-flex align-items-stretch">
+    <div class="card text-center card-product w-100">
+      <div class="card-product__img">
+        <img class="card-img" src="{{ product.image.url }}" alt="{{ product.name }}" />
+        {% if user.user_type == "enduser" %}
+        <ul class="card-product__imgOverlay">
+          <li>
+            <a
+              href="{% url 'add_to_cart' product.id %}"
+              class="btn btn-sm btn-outline-primary"
+              style="border-radius: 100%"
+            >
+              <i class="ti-shopping-cart"></i>
+            </a>
+          </li>
+        </ul>
+        {% endif %}
+      </div>
+      <div class="card-body">
+        <p>{{ product.category }}</p>
+        <h4 class="card-product__title"><a href="{% url 'product_detail' product.id %}">{{ product.name }}</a></h4>
+        <p class="card-product__price">Rs.{{ product.price }}</p>
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>

@@ -1,0 +1,68 @@
+{% extends 'main/base.html' %} {% load mathfilters %} {% block content %}
+<!--================Order Details Area =================-->
+<section class="order_details section-margin--small">
+  <div class="container">
+    <p class="text-center billing-alert"><strong>Thank you. Your order has been received.</strong></p>
+    <div class="row mb-5">
+      <div class="col-md-6 col-xl-6 mb-4 mb-xl-0">
+        <div class="confirmation-card">
+          <h3 class="billing-title">Order Info</h3>
+          <table class="order-rable">
+            <tr>
+              <td>Order number</td>
+              <td>: #{{ order.order_number }}</td>
+
+            </tr>
+            <tr>
+              <td>Date</td>
+              <td>: {{ order.created_at|date:"M d, Y" }}</td>
+            </tr>
+            <tr>
+              <td>Total</td>
+              <td>: INR {{ order.total_price }}</td>
+            </tr>
+            <tr>
+              <td>Payment method</td>
+              <td>: {{ order.get_payment_method_display }}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6 col-xl-6 mb-4 mb-xl-0">
+        <div class="confirmation-card">
+          <h3 class="billing-title">Billing Address</h3>
+          <table class="order-rable">
+            <td>: {{ order.address }}</td>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="order_details_table">
+      <h2>Order Details</h2>
+      <div class="table-responsive">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Product</th>
+              <th scope="col">Quantity</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for item in items %}
+            <tr>
+              <td>{{ item.product.name }}</td>
+              <td>x {{ item.quantity }}</td>
+              <td>Rs. {{ item.price|floatformat:2 }}</td>
+            </tr>
+            {% endfor %}
+              <!-- <td>{{ order.total_price|floatformat:2 }}</td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Order Details Area =================-->
+{% endblock content %}

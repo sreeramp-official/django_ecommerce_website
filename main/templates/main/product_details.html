@@ -1,0 +1,65 @@
+{% extends 'main/base.html' %} {% block content %}
+<!--================Single Product Area =================-->
+<div class="product_image_area">
+  <div class="container">
+    <div class="row s_product_inner">
+      <div class="col-lg-6">
+        <div class="owl-carousel owl-theme s_Product_carousel">
+          <div class="single-prd-item">
+            <img class="img-fluid" src="{{product.image.url}}" alt="" />
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-5 offset-lg-1">
+        <div class="s_product_text">
+          <h3>{{product.name}}</h3>
+          <h2>Rs.{{product.price}}</h2>
+          <ul class="list">
+            <li>
+              <a class="active" href="#"><span>Category</span> : {{product.category}}</a>
+            </li>
+            <li>
+              <a href="#"><span>Availibility</span> : {{product.availability}}</a>
+            </li>
+          </ul>
+          <p>{{product.description}}</p>
+          <div class="product_count">
+            <label for="qty">Quantity:</label>
+            <input
+              type="text"
+              name="qty"
+              id="sst"
+              size="2"
+              maxlength="12"
+              value="1"
+              title="Quantity:"
+              class="input-text qty"
+            />
+            {% if user.user_type == "enduser" %}
+            <form action="" method="post">
+              {% csrf_token %}
+              <br />
+              <a class="button primary-btn" href="{% url 'add_to_cart' product.id %}">Add to Cart</a>
+            </form>
+            {% endif %}
+            <br />
+            {% if user.user_type == "admin" %}
+            <a href="{% url 'update_product' product.id %}" class="button">Update Item</a>
+            {% elif user.user_type == "owner" and product.added_by == user %}
+            <a href="{% url 'update_product' product.id %}" class="button">Update Item</a>
+            {% endif %}
+            <br />
+            <br />
+            {% if user.user_type == "admin" %}
+            <a href="{% url 'delete_product' product.id %}" class="button">Delete Item</a>
+            {% elif user.user_type == "owner" and product.added_by == user %}
+            <a href="{% url 'delete_product' product.id %}" class="button">Delete Item</a>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!--================End Single Product Area =================-->
+{% endblock content %}

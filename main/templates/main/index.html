@@ -1,0 +1,37 @@
+{% extends 'main/base.html' %} {% load static %} {% block content %}
+<main class="site-main">
+  <section class="hero-banner">
+    <div class="container">
+      <div class="row no-gutters align-items-center pt-60px">
+        <div class="col-5 d-none d-sm-block">
+          <div class="hero-banner__img">
+            <img class="img-fluid" src="{% static 'main/images/home/hero-banner.png' %}" alt="" />
+          </div>
+        </div>
+        <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
+          <div class="hero-banner__content">
+            <h4>Shop is fun</h4>
+            <h1>Browse Our Premium Product</h1>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque
+              faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque.
+            </p>
+            <a class="button button-hero" href="{% url 'shop' %}">Browse Now</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-margin calc-60px">
+    <div class="container">
+      <div class="section-intro pb-60px text-center">
+        <p>Newest product in the market</p>
+        <h2>Latest <span class="section-intro__style">Product</span></h2>
+      </div>
+
+      {% include 'main/product_card.html' %}
+    </div>
+  </section>
+</main>
+{% endblock content %}

@@ -1,0 +1,46 @@
+{% extends "main/base.html" %} {% load widget_tweaks %} {% block content %}
+<!--================Login Box Area =================-->
+<section class="login_box_area section-margin">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="login_box_img">
+          <div class="hover">
+            <h4>Already have an account?</h4>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipiscing elit. Sit amet consectetur adipiscing elit quisque
+              faucibus ex. Adipiscing elit quisque faucibus ex sapien vitae pellentesque.
+            </p>
+            <a class="button button-account" href="{% url 'login' %}">Login Now</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="login_form_inner register_form_inner">
+          <h3>Create an account</h3>
+          <form class="row login_form" action="" id="register_form" method="POST">
+            {% csrf_token %}
+            <div class="col-md-12 form-group">
+              {{ form.username.label_tag }} {{ form.username|add_class:"form-control" }}
+            </div>
+            <div class="col-md-12 form-group">{{ form.email.label_tag }} {{ form.email|add_class:"form-control" }}</div>
+            <div class="col-md-12 form-group">
+              {{ form.password1.label_tag }} {{ form.password1|add_class:"form-control" }}
+            </div>
+            <div class="col-md-12 form-group">
+              {{ form.password2.label_tag }} {{ form.password2|add_class:"form-control" }}
+            </div>
+            <div class="col-md-12 form-group">
+              {{ form.user_type.label_tag }} {{ form.user_type|add_class:"form-control w-100" }}
+            </div>
+            <div class="col-md-12 form-group">
+              <button type="submit" value="submit" class="button button-register w-100">Register</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!--================End Login Box Area =================-->
+{% endblock content %}
